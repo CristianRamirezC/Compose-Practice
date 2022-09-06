@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposepractice.R
 import com.example.jetpackcomposepractice.model.MediaItem
 import com.example.jetpackcomposepractice.model.getMedia
@@ -32,7 +35,7 @@ fun MediaList(
         items(getMedia()) { item ->
             MediaListItem(
                 mediaItem = item,
-                modifier = Modifier.padding(dimensionResource(R.dimen.padding_xsmall)),
+                modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium)),
                 onClick = { onMediaClick(item) }
             )
         }
@@ -45,13 +48,16 @@ fun MediaListItem(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    Column(
+    Card(
         modifier = modifier
-            .clickable(onClick = onClick)
+            .clickable(onClick = onClick),
+        elevation = 8.dp,
+        shape = RoundedCornerShape(10.dp)
     ) {
-        Thumb(mediaItem = mediaItem)
-        Title(mediaItem = mediaItem)
-
+        Column() {
+            Thumb(mediaItem = mediaItem)
+            Title(mediaItem = mediaItem)
+        }
     }
 }
 
